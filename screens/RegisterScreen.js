@@ -21,9 +21,11 @@ const RegisterScreen = ({ navigation }) => {
         auth
         .createUserWithEmailAndPassword(email, password)
         .then((authUser) => {
-            authUser.user.update({
+            authUser.user.updateProfile({
                 displayName: name,
-                photoUrl: imageUrl || "https://th.bing.com/th/id/OIP.1GLj98RqBz9ZFQp_DYpdqQAAAA?pid=ImgDet&w=270&h=270&rs=1",
+                photoUrl: 
+                 imageUrl || 
+                    "https://th.bing.com/th/id/OIP.1GLj98RqBz9ZFQp_DYpdqQAAAA?pid=ImgDet&w=270&h=270&rs=1",
             });
         })
         .catch((error) => alert(error.message));

@@ -12,7 +12,7 @@ const [password, setPassword] = useState("");
 useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
         if(authUser) {
-            navigation.navigate.replace("Home");
+            navigation.replace("Home");
         }
     })
     return unsubscribe;
