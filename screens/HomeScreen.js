@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CustomListItem from "../components/CustomListItem";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: "Welcome to Signal",
+    });
+  }, [navigation]);
+
   return (
     <SafeAreaView>
       <ScrollView>
