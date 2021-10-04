@@ -16,7 +16,7 @@ const RegisterScreen = ({ navigation }) => {
     navigation.setOptions({
       headerBackTitle: "Back to Login",
     });
-  }, []);
+  }, [navigation]);
 
   const register = () => {
     auth
@@ -26,7 +26,7 @@ const RegisterScreen = ({ navigation }) => {
           displayName: name,
           photoUrl:
             imageUrl ||
-            "https://th.bing.com/th/id/OIP.1GLj98RqBz9ZFQp_DYpdqQAAAA?pid=ImgDet&w=270&h=270&rs=1",
+            "https://www.sideshow.com/storage/product-images/901006/jake-sully_avatar_silo.png",
         });
       })
       .catch((error) => alert(error.message));
