@@ -1,16 +1,16 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import {
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
-  ScrollView,
   TouchableOpacity,
+  View,
 } from "react-native";
 import { Avatar } from "react-native-elements";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
-import CustomListItem from "../components/CustomListItem";
 import { auth, db } from "../firebase";
+import CustomListItem from "../components/CustomListItem";
 
 const HomeScreen = ({ navigation }) => {
   const signOutUser = () => {
