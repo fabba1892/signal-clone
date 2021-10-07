@@ -24,9 +24,9 @@ const RegisterScreen = ({ navigation }) => {
       .then((authUser) => {
         authUser.user.updateProfile({
           displayName: name,
-          photoUrl:
+          photoURL:
             imageUrl ||
-            "https://www.sideshow.com/storage/product-images/901006/jake-sully_avatar_silo.png",
+            "https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png",
         });
       })
       .catch((error) => alert(error.message));
