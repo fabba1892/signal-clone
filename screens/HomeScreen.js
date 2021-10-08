@@ -13,11 +13,25 @@ import { auth, db } from "../firebase";
 import CustomListItem from "../components/CustomListItem";
 
 const HomeScreen = ({ navigation }) => {
+  const [chats, setChats] = useState([]);
+
   const signOutUser = () => {
     auth.signOut().then(() => {
       navigation.replace("Login");
     });
   };
+
+  useLayoutEffect(() => {
+    const unsubscribe = db.collection("chats").onSnapshot((snapshot) =>
+      setChats(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }))
+      )
+    );
+    return unsubscribe;
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -58,7 +72,9 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <CustomListItem />
+        {chats.map(({ id, data: { chatName } }) => (
+          <CustomListItem key={id} id={id} chatName={chatName} />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
