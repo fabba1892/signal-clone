@@ -29,9 +29,29 @@ const Chatscreen = ({ navigation, route }) => {
       ),
 
       headerLeft: () => (
-        <TouchableOpacity>
+        <TouchableOpacity
+          style={{ marginLeft: 10 }}
+          onPress={navigation.goBack}
+        >
           <AntDesign name="arrowleft" size={24} color="white" />
         </TouchableOpacity>
+      ),
+      headerRight: () => (
+        <View
+          style={{
+            marginRight: 20,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: 80,
+          }}
+        >
+          <TouchableOpacity>
+            <FontAwesome name="video-camera" size={24} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="call" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
       ),
     });
   }, [navigation]);
