@@ -1,6 +1,7 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Avatar } from "react-native-elements";
+import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 
 const Chatscreen = ({ navigation, route }) => {
   useLayoutEffect(() => {
@@ -15,9 +16,22 @@ const Chatscreen = ({ navigation, route }) => {
             alignItems: "center",
           }}
         >
-          <Avatar rounded source={{ uri: "" }} />
-          <Text>{route.params.chatName}</Text>
+          <Avatar
+            rounded
+            source={{
+              uri: "https://seeklogo.net/wp-content/uploads/2012/11/liverbir-vector-logo-400x400.png",
+            }}
+          />
+          <Text style={{ color: "white", marginLeft: 10, fontWeight: "700" }}>
+            {route.params.chatName}
+          </Text>
         </View>
+      ),
+
+      headerLeft: () => (
+        <TouchableOpacity>
+          <AntDesign name="arrowleft" size={24} color="white" />
+        </TouchableOpacity>
       ),
     });
   }, [navigation]);
