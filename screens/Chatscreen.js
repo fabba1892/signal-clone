@@ -7,6 +7,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { Avatar } from "react-native-elements";
@@ -69,6 +70,10 @@ const Chatscreen = ({ navigation, route }) => {
     });
   }, [navigation]);
 
+  const sendMessage = () => {
+    Keyboard.dismiss();
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <StatusBar style="light" />
@@ -77,23 +82,25 @@ const Chatscreen = ({ navigation, route }) => {
         style={styles.container}
         keyboardVerticalOffset={90}
       >
-        <>
-          <ScrollView>
-            {/* <ScrollView>{chat goes here } </ScrollView> */}
-          </ScrollView>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <>
+            <ScrollView>
+              {/* <ScrollView>{chat goes here } </ScrollView> */}
+            </ScrollView>
 
-          <View style={styles.footer}>
-            <TextInput
-              value={input}
-              onChange={(text) => setInput(text)}
-              placeholder="Signal Message"
-              textInputStyle={styles.textInput}
-            />
-            <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
-              <Ionicons name="send" size={24} colo="#2B68E6" />
-            </TouchableOpacity>
-          </View>
-        </>
+            <View style={styles.footer}>
+              <TextInput
+                value={input}
+                onChange={(text) => setInput(text)}
+                placeholder="Signal Message"
+                textInputStyle={styles.textInput}
+              />
+              <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
+                <Ionicons name="send" size={24} colo="#2B68E6" />
+              </TouchableOpacity>
+            </View>
+          </>
+        </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
