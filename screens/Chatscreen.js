@@ -1,9 +1,11 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -13,6 +15,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 
 const Chatscreen = ({ navigation, route }) => {
+  const [input, setInput] = useState("");
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Chat",
@@ -74,7 +78,21 @@ const Chatscreen = ({ navigation, route }) => {
         keyboardVerticalOffset={90}
       >
         <>
-          <ScrollView>{/* {chat goes here }  */}</ScrollView>
+          <ScrollView>
+            {/* <ScrollView>{chat goes here } </ScrollView> */}
+          </ScrollView>
+
+          <View style={styles.footer}>
+            <TextInput
+              value={input}
+              onChange={(text) => setInput(text)}
+              placeholder="Signal Message"
+              textInputStyle={styles.textInput}
+            />
+            <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
+              <Ionicons name="send" size={24} colo="#2B68E6" />
+            </TouchableOpacity>
+          </View>
         </>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -85,4 +103,6 @@ export default Chatscreen;
 
 const styles = StyleSheet.create({
   container: {},
+  footer: {},
+  textInput: {},
 });
