@@ -16,7 +16,8 @@ import { StatusBar } from "expo-status-bar";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import { Avatar } from "react-native-elements";
 import { db, auth } from "../firebase";
-import * as firebase from "firebase";
+import "firebase/firestore";
+import firebase from "firebase/app";
 
 const Chatscreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
@@ -75,6 +76,16 @@ const Chatscreen = ({ navigation, route }) => {
 
   const sendMessage = () => {
     Keyboard.dismiss();
+
+    db.collection("chats").doc(route.params.id).collection("messages").add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      message: input,
+      displayName: auth.currentUser.displayName,
+      email: auth.currentUser.email,
+      photoURL: auth.currentUser.photoURL,
+    });
+
+    setInput("");
   };
 
   return (
