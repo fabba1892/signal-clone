@@ -1,7 +1,9 @@
 import React, { useLayoutEffect, useState } from "react";
 import {
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,10 +12,11 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import { Avatar } from "react-native-elements";
-import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
+import { Avatar } from "react-native-elements";
+import { db, auth } from "../firebase";
+import * as firebase from "firebase";
 
 const Chatscreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
@@ -90,13 +93,14 @@ const Chatscreen = ({ navigation, route }) => {
 
             <View style={styles.footer}>
               <TextInput
-                value={input}
-                onChange={(text) => setInput(text)}
                 placeholder="Signal Message"
-                textInputStyle={styles.textInput}
+                style={styles.textInput}
+                onSubmitEditing={sendMessage}
+                value={input}
+                onChangeText={(text) => setInput(text)}
               />
               <TouchableOpacity onPress={sendMessage} activeOpacity={0.5}>
-                <Ionicons name="send" size={24} colo="#2B68E6" />
+                <Ionicons name="send" size={24} color="#2B68E6" />
               </TouchableOpacity>
             </View>
           </>
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
     borderColor: "transparent",
     backgroundColor: "#ECECEC",
-    borderWidth: 1,
+    // borderWidth: 1,
     padding: 10,
     color: "grey",
     borderRadius: 30,
