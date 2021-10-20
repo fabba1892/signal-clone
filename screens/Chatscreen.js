@@ -21,6 +21,7 @@ import firebase from "firebase/app";
 
 const Chatscreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
+  const [messages, setMessages] = useState("");
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -88,6 +89,24 @@ const Chatscreen = ({ navigation, route }) => {
     setInput("");
   };
 
+  useLayoutEffect(() => {
+    const unsubscribe = db
+      .collection("chats")
+      .doc(route.params.id)
+      .collection("messages")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setMessages(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        )
+      );
+
+    return unsubscribe;
+  }, [route]);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <StatusBar style="light" />
@@ -99,7 +118,19 @@ const Chatscreen = ({ navigation, route }) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
             <ScrollView>
-              {/* <ScrollView>{chat goes here } </ScrollView> */}
+              {messages.map(({ id, data }) =>
+                data.email === auth.currentUser.email ? (
+                  <View key={id} style={styles.receiver}>
+                    <Avatar />
+                    <Text style={styles.receiverText}>{data.message}</Text>
+                  </View>
+                ) : (
+                  <View style={styles.sender}>
+                    <Avatar />
+                    <Text style={styles.senderText}>{data.message}</Text>
+                  </View>
+                )
+              )}
             </ScrollView>
 
             <View style={styles.footer}>
