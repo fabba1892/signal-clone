@@ -21,7 +21,7 @@ import firebase from "firebase/app";
 
 const Chatscreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState("");
+  const [messages, setMessages] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -158,6 +158,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  receiver: {
+    padding: 15,
+    backgroundColor: "#ECECEC",
+    alignSelf: "flex-end",
+    borderRadius: 20,
+    marginRight: 15,
+    marginBottom: 20,
+    maxWidth: "80%",
+    position: "relative",
+  },
+
   footer: {
     flexDirection: "row",
     alignItems: "center",
