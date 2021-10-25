@@ -140,7 +140,21 @@ const Chatscreen = ({ navigation, route }) => {
                   </View>
                 ) : (
                   <View style={styles.sender}>
-                    <Avatar />
+                    <Avatar
+                      position="absolute"
+                      containerStyle={{
+                        position: "absolute",
+                        bottom: -15,
+                        left: -5,
+                      }}
+                      bottom={-15}
+                      left={-5}
+                      rounded
+                      size={30}
+                      source={{
+                        uri: data.photoURL,
+                      }}
+                    />
                     <Text style={styles.senderText}>{data.message}</Text>
                   </View>
                 )
