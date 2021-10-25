@@ -15,21 +15,30 @@ const CustomListItem = ({ id, chatName, enterChat }) => {
       .onSnapshot((snapshot) =>
         setChatMessages(snapshot.docs.map((doc) => doc.data()))
       );
+
+    return unsubscribe;
   });
 
   return (
-    <ListItem onPress={() => enterChat(id, chatName)} key={id} bottomDivider>
+    <ListItem
+      key={id}
+      onPress={() => enterChat(id, chatName)}
+      key={id}
+      bottomDivider
+    >
       <Avatar
         rounded
         source={{
-          uri: "https://seeklogo.net/wp-content/uploads/2012/11/liverbir-vector-logo-400x400.png",
+          uri:
+            chatMessages?.[0]?.photoURL ||
+            "https://seeklogo.net/wp-content/uploads/2012/11/liverbir-vector-logo-400x400.png",
         }}
       />
       <ListItem.Content>
         <ListItem.Title style={{ fontWeight: "800" }} />
         {chatName}{" "}
         <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
-          This is a test subtitle
+          {chatMessages?.[0]?.displayName}: {chatMessages?.[0]?.message}{" "}
         </ListItem.Subtitle>
       </ListItem.Content>
     </ListItem>
