@@ -38,7 +38,7 @@ const Chatscreen = ({ navigation, route }) => {
           <Avatar
             rounded
             source={{
-              uri: "https://seeklogo.net/wp-content/uploads/2012/11/liverbir-vector-logo-400x400.png",
+              uri: messages[0]?.data.photoURL,
             }}
           />
           <Text style={{ color: "white", marginLeft: 10, fontWeight: "700" }}>
@@ -73,7 +73,7 @@ const Chatscreen = ({ navigation, route }) => {
         </View>
       ),
     });
-  }, [navigation]);
+  }, [navigation, messages]);
 
   const sendMessage = () => {
     Keyboard.dismiss();
@@ -117,7 +117,7 @@ const Chatscreen = ({ navigation, route }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <>
-            <ScrollView>
+            <ScrollView contentContainerStyle={{ paddingTop: 15 }}>
               {messages.map(({ id, data }) =>
                 data.email === auth.currentUser.email ? (
                   <View key={id} style={styles.receiver}>
