@@ -168,12 +168,20 @@ const styles = StyleSheet.create({
     maxWidth: "80%",
     position: "relative",
   },
-
   footer: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
     padding: 15,
+  },
+  sender: {
+    padding: 15,
+    backgroundColor: "#2B68E6",
+    alignSelf: "flex-start",
+    borderRadius: 20,
+    margin: 15,
+    maxWidth: "80%",
+    position: "relative",
   },
   textInput: {
     bottom: 0,
